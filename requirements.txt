@@ -1,0 +1,25 @@
+# This requirements file lists all dependecies for this project.
+#
+# Run 'pip install -r requirements.txt -t lib/' to install these dependencies
+# Or in case of each, pip install -t lib beautifulsoup4
+# in this project's lib/ directory.  The `lib` directory is added to `sys.path`
+# by `appengine_config.py`.
+#--------------------
+#Note:If you meet 'DistutilsOptionError: must supply either home or prefix/exec-prefix — not both', 
+#You can make this "empty prefix" the default by adding a ~/.pydistutils.cfg file with the following contents:
+#[install]
+#prefix=
+#However causes the virtualenv command to break.
+#----------------------
+#WSGI micro web-framework--http://bottlepy.org/docs/0.12/index.html
+bottle==0.12.9
+#The fastest markdown parser--https://github.com/lepture/mistune
+mistune==0.7.2
+#Pygments is a syntax highlighting package written in Python-->http://pygments.org/
+Pygments
+#GoogleAppEngineCloudStorageClient
+GoogleAppEngineCloudStorageClient
+#HTML or XML parser--https://pypi.python.org/pypi/beautifulsoup4-->In case pip install -t lib beautifulsoup4
+beautifulsoup4
+#if pip is updated, then pip install --upgrade pip setuptools
+

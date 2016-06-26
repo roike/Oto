@@ -1,0 +1,10 @@
+application: elabo-one
+
+dispatch:
+- url: "*/thirdpen/*"
+  module: thirdpen
+
+- url: "*/*"
+  module: default
+
+

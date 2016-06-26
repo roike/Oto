@@ -1,0 +1,85 @@
+/*
+ * third-pen spa.home.css
+*/
+
+#home-container {
+  padding: 42px 0;
+}
+
+#home-container h2 {
+  color: #757575;
+  font-size: 45px;
+  font-weight: 200;
+  margin-top: 0;
+}
+
+.home-content {
+  max-width: 850px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.home-section {
+  margin: 16px auto;
+  padding: 0;
+}
+
+.home-section p {
+  line-height: 28px;
+  font-size: 16px;
+}
+.home-section ~ .home-section {
+  border-top: 1px solid #F0F0F0;
+}
+
+.home-section footer {
+  border-top: 1px solid #F0F0F0;
+  padding: 10px 16px;
+  background-color: transparent;
+}
+
+#home-container figure {
+  float: right;
+  margin-bottom: 3em;
+  margin-top: -26px;
+  max-height: 200px;
+  text-align: center;
+  width: 300px;
+}
+
+#home-container figure img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+#home-container figure.align-paragraph,
+#home-container figure ~ figure {
+  clear: right;
+  margin-top: 0;
+}
+
+#home-container figure ~ p,
+#home-container figure ~ ul {
+  margin-right: 320px;
+}
+
+/* -----Responsive layout------------ */
+@media screen and (max-width: 850px) {
+
+  #home-container figure {
+    float: none;
+    margin-bottom: 16px;
+    margin-top: 0;
+    width: auto;
+  }
+
+  #home-container figure ~ p, #home-container figure ~ ul {
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  #home-container figure {
+    width: 200px;
+  }
+}

@@ -1,0 +1,25 @@
+/*
+ * spa.channel.css
+ * ryuji.oike@gmail.com
+*/
+
+#channel-container {
+  padding: 42px 0;
+}
+
+.channel-content {
+  max-width: 900px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+#channel-container table {
+  width: 90%;
+}
+
+#channel-container .mdl-textfield { width: 250px; }
+#channel-container .mdl-checkbox { display: inline; }
+#channel-container .mdl-button {
+  color: #616161;
+  right: -45px;
+}

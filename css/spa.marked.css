@@ -1,0 +1,33 @@
+/**
+ * elabo-one spa.marked.css
+ */
+#marked-dialog {
+  width: 480px;
+}
+#marked-dialog input { width: 120px; }
+#marked-container {
+  box-sizing: border-box;
+  min-height: calc(100vh - 164px);  /* 100vh - 64px header - 100px footer */
+  padding: 3em 0;
+  position: relative;
+  padding: 15px 30px;
+}
+
+.marked-title { width: 45%; }
+.marked-tag { width: 20%; }
+.marked-slug { width: 15%; }
+.marked-channel { width: 15%; }
+.marked-body, .marked-preview {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+.marked-preview {
+  resize: horizontal;
+  overflow: auto;
+}
+
+#handle-image { display: none; }
+
+
+

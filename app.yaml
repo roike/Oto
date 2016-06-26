@@ -1,0 +1,67 @@
+application: elabo-one
+version: 1-30
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+instance_class: F1
+automatic_scaling:
+  #min_idle_instances: 1
+  max_idle_instances: 2
+  #min_pending_latency: 30ms  # default value
+  #max_pending_latency: automatic
+  #max_concurrent_requests: 10
+
+inbound_services:
+#- xmpp_message
+#- warmup
+#- channel_presence
+- mail
+
+builtins:
+- remote_api: on
+
+skip_files:
+- ^(.*/)?#.*#$
+- ^(.*/)?.*~$
+- ^(.*/)?.*\.py[co]$
+- ^(.*/)?.*/RCS/.*$
+- ^(.*/)?\..*$
+#the above list is default
+- ^(.*/)?.*\.[tc]sv$
+- ^(.*/)?.*/test/.*$
+- ^(.*/)?.*/layout/.*$
+
+handlers:
+# App Engine serves and caches static files contained in the listed directories
+# (and subdirectories). Uncomment and set the directory as needed.
+- url: /css
+  static_dir: css
+  mime_type: text/css
+- url: /js
+  static_dir: js
+  mime_type: text/javascript
+- url: /images
+  static_dir: images
+- url: /test/.*
+  script: main.bottle
+  login: admin
+# This handler tells app engine how to route requests to a WSGI application.
+# The script value is in the format <path.to.module>.<wsgi_application>
+# where <wsgi_application> is a WSGI application object.
+#secure: always -->in case of only to allow https access
+- url: .*  # This regex directs all routes to main.bottle
+  script: main.bottle
+  #login: admin
+# Third party libraries that are included in the App Engine SDK must be listed
+# here if you want to use them.  See
+# https://developers.google.com/appengine/docs/python/tools/libraries27 for
+# a list of libraries included in the SDK.  Third party libs that are *not* part
+# of the App Engine SDK don't need to be listed here, instead add them to your
+# project directory, either as a git submodule or as a plain subdirectory.
+# TODO: List any other App Engine SDK libs you may need here.
+libraries:
+- name: lxml
+  version: latest
+- name: PIL
+  version: latest

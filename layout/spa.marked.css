@@ -1,0 +1,21 @@
+/**
+ * spa.marked.css
+ * ryuji.oike@gmail.com
+ */
+
+.marked-content {
+  box-sizing: border-box;
+  min-height: calc(100vh - 164px);  /* 100vh - 64px header - 100px footer */
+  padding: 3em 0;
+  position: relative;
+  padding: 15px 30px;
+}
+
+.marked-title { width: 50%; }
+.marked-tag { width: 30%; }
+.marked-slug { width: 15%; }
+.marked-body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}

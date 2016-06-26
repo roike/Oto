@@ -1,0 +1,60 @@
+/*
+ * spa.newist.css
+ * ryuji.oike@gmail.com
+*/
+
+#newist-container {
+  padding: 42px 0;
+}
+
+.newist-content {
+  max-width: 900px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.newist-section {
+  margin: 16px auto;
+  max-width: 720px;
+  padding: 0;;
+}
+
+.newist-section p {
+  line-height: 28px;
+  font-size: 16px;
+}
+
+.newist-section ~ .newist-section {
+  border-top: 1px solid #F0F0F0;
+}
+
+.newist-section footer {
+  border-top: 1px solid #F0F0F0;
+  padding: 10px 16px;
+  background-color: transparent;
+}
+
+#newist-container figure {
+  float: right;
+  margin-bottom: 3em;
+  margin-top: -56px;
+  max-height: 200px;
+  text-align: center;
+  width: 300px;
+}
+
+#newist-container figure img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+#newist-container figure.align-paragraph,
+#newist-container figure ~ figure {
+  clear: right;
+  margin-top: 0;
+}
+
+#newist-container figure ~ p,
+#newist-container figure ~ ul {
+  margin-right: 320px;
+}

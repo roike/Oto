@@ -1,0 +1,50 @@
+/*
+ * spa.blog.css
+ * ryuji.oike@gmail.com
+*/
+
+#blog-container {
+  padding: 42px 0;
+}
+
+
+.blog-header {
+  margin: 12px 16px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  max-width: 720px;
+}
+
+.blog-header:after {
+  content: '';
+  display: block;
+}
+
+.blog-content {
+  max-width: 900px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.blog-section {
+  margin: 16px auto;
+  max-width: 720px;
+  padding: 0;
+}
+
+.blog-section p {
+  line-height: 28px;
+  font-size: 16px;
+}
+
+.blog-nav {
+  margin:12px 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 108%;
+  font-weight: 500;
+}
+

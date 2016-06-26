@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!--
+  channel-layout.html
+  Copyright 2016 ryuji.oike@gmail.com
+-->
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elabo</title>
+  <link rel="shortcut icon" href="../images/icon.png">
+  <!-- stylesheets -->
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosansjapanese.css" type="text/css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.blue_grey-blue.min.css" />
+  <link rel="stylesheet" href="../css/spa.css" type="text/css" />
+  <link rel="stylesheet" href="../css/spa.channel.css" type="text/css" />
+  <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+</head>
+<body>
+  <div class="mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <a class="elabo-logo-link" href="/">
+          <h1>
+            <img class="elabo-logo"
+               alt="Elabo"
+               src="../images/logo.svg" />
+          </h1>
+        </a>
+        <span class="logo-define">Google App Engine Blog System</span>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+          <h2>Elabo ページナビゲーション</h2>
+          <a class="mdl-navigation__link" href="/newist">新着エントリ</a>
+          <a class="mdl-navigation__link" href="/marked">記事投稿</a>
+          <a class="mdl-navigation__link" href="/photo">写真投稿</a>
+          <a class="mdl-navigation__link" href="/search">記事検索</a>
+          <a class="mdl-navigation__link" href="/channel">投稿設定</a>
+        </nav>
+        <div class="mdl-layout-spacer"></div>
+        <div id="shell-head-acct">ryuji.oike</div>
+      </div>
+    </header>
+    <main id="spa" class="mdl-layout__content">
+      <article id="channel-container">
+        <div class="channel-content mdl-grid">
+          <div class="mdl-card mdl-cell--12-col mdl-shadow--2dp">
+            <div class="mdl-card__title">
+               <h2>My Channel</h2>
+            </div>
+            <div class="about-section mdl-card__supporting-text">
+              <section>
+                <h3>管理しているChannel</h3>
+                <table class="mdl-data-table mdl-js-data-tablei">
+                  <thead>
+                    <tr>
+                      <th>Channel</th>
+                      <th>Host</th>
+                      <th>Description</th>
+                      <th>Members</th>
+                      <th>World</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>thirdpen</td>
+                      <td>ryuji.oike</td>
+                      <td>Technology Blog</td>
+                      <td>7</td>
+                      <td>公開</td>
+                    </tr>
+                    <tr>
+                      <td>thirdpen</td>
+                      <td>ryuji.oike</td>
+                      <td>Technology Blog</td>
+                      <td>7</td>
+                      <td>公開</td>
+                    </tr>
+                    <tr>
+                      <td>thirdpen</td>
+                      <td>ryuji.oike</td>
+                      <td>Technology Blog</td>
+                      <td>7</td>
+                      <td>公開</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+            </div>
+            <div class="about-section mdl-card__supporting-text">
+              <section>
+                <h3>Channelを作る</h3>
+                <div class="mdl-textfield mdl-js-textfield">
+                  <input class="mdl-textfield__input" type="text" id="channel-name">
+                  <label class="mdl-textfield__label" for="channel-name">Channel Name...</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield">
+                  <input class="mdl-textfield__input" type="text" id="channel-description">
+                  <label class="mdl-textfield__label" for="channel-description">Channel Description...</label>
+                </div>
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="channel-open">
+                  <input type="checkbox" id="channel-open" class="mdl-checkbox__input" >
+                  <span class="mdl-checkbox__label">公開</span>
+                </label>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                  Channel登録
+                </button>
+              </section>
+            </div>
+          </div>
+        </div>
+      </article>
+    </main>
+    <footer class="mdl-mini-footer">
+      <div class="mdl-mini-footer--left-section">
+        <div class="mdl-logo">
+          <a class="elabo-logo-link" href="/">
+            <img class="elabo-logo"
+               alt="Elabo logo"
+               src="../images/logo.svg">
+          </a>
+          <span class="logo-define">Google App Engine Blog System</span>
+        </div>
+      </div>
+      <div class="mdl-mini-footer--right-section">
+        <div>Copyright ryuji.oike. 2016 All rights reserved.</div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

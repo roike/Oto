@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<!--
+  newist-layout.html
+  Copyright 2016 ryuji.oike@gmail.com
+-->
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elabo</title>
+  <link rel="shortcut icon" href="../images/icon.png">
+  <!-- stylesheets -->
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosansjapanese.css" type="text/css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.blue_grey-blue.min.css" />
+  <link rel="stylesheet" href="../css/spa.css" type="text/css" />
+  <link rel="stylesheet" href="../css/spa.newist.css" type="text/css" />
+  <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+</head>
+<body>
+  <div class="mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <a class="elabo-logo-link" href="/">
+          <h1>
+            <img class="elabo-logo"
+               alt="Elabo"
+               src="../images/logo.svg" />
+          </h1>
+        </a>
+        <span class="logo-define">Google App Engine Blog System</span>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+          <h2>Elabo ページナビゲーション</h2>
+          <a class="mdl-navigation__link" href="/newist">新着エントリ</a>
+          <a class="mdl-navigation__link" href="/marked">記事投稿</a>
+          <a class="mdl-navigation__link" href="/photo">写真投稿</a>
+          <a class="mdl-navigation__link" href="/search">記事検索</a>
+          <a class="mdl-navigation__link" href="/channel">投稿設定</a>
+        </nav>
+        <div class="mdl-layout-spacer"></div>
+        <div id="shell-head-acct">ryuji.oike</div>
+      </div>
+    </header>
+    <main id="spa" class="mdl-layout__content">
+      <article id="newist-container">
+        <div class="newist-content mdl-grid">
+          <div class="mdl-card mdl-cell--12-col mdl-shadow--2dp">
+            <div class="mdl-card__title">
+               <h2>新着エントリ</h2>
+            </div>
+            <div class="newist-section mdl-card__supporting-text">
+              <section>
+                <h3 id="why-are-we-doing-this">
+                  What we do?
+                </h3>
+                <figure class="align-paragraph">
+                  <img alt="About ThirdPen" src="../images/logo.svg">
+                </figure>
+                <p>
+                Chromeで動作を確認していますが、おそらくIE以外は動作に問題はないと思います。
+                今後スマフォ及びタブレットに対応する予定ですが、現在はまだPCでのみ表示を確認しています。
+                </p>
+                <p>
+                本サイトはWebフォント(Noto Sans Japanease)を使用しています。またレイアウトにMaterial Design Lightを使っています。
+                BlogにはGoogle App Engineで動作する自作エンジンを使用しています。
+                </p>
+                <footer class="mdl-mini-footer">
+                  <span>April 18, 2016</span>
+                </footer>
+              </section>
+            </div>
+            <div class="newist-section mdl-card__supporting-text">
+              <section>
+                <h3 id="how-it-works">
+                Blogエンジンver0.1をGithubに公開
+                </h3>
+                <figure class="align-paragraph">
+                  <img alt="logo@pen" src="../images/logo.svg">
+                </figure>
+                <p>
+                公開先アドレスは。ライセンスはMITです。
+                </p>
+                <p>
+                  Don't worry: Project Sunroof doesn't give the address to anybody else unless you ask it to.
+                </p>
+                <footer class="mdl-mini-footer">
+                  <span>April 18, 2016</span>
+                </footer>
+              </section>
+            </div>
+            <div class="newist-section mdl-card__supporting-text">
+              <section>
+                <h3 id="customizing-for-your-roof">
+                Customizing for your roof
+                </h3>
+                <figure class="align-paragraph">
+                  <img alt="Customizing for Your Roof" src="../images/logo.svg">
+                </figure>
+                <p>
+                  Project Sunroof computes how much sunlight hits your roof in a year. It takes into account:
+                </p>
+                <ul>
+                  <li>Google's database of aerial imagery and maps</li>
+                  <li>3D modeling of your roof</li>
+                  <li>Shadows cast by nearby structures and trees</li>
+                  <li>All possible sun positions over the course of a year</li>
+                  <li>Historical cloud and temperature patterns that might affect solar energy production</li>
+                </ul>
+                <footer class="mdl-mini-footer">
+                  <span>April 18, 2016</span>
+                </footer>
+              </section>
+            </div>
+            <div class="newist-section mdl-card__supporting-text">
+              <section>
+                <h3 id="computing-your-savings">Computing your savings</h3>
+                <figure>
+                  <img alt="Compute your savings" src="../images/logo.svg">
+                </figure>
+                <p>
+                  Project Sunroof uses current solar industry pricing data to run the numbers on leasing, taking a loan, or buying solar panels for your house to help you choose what's best for you.
+                </p>
+                <figure>
+                  <img alt="Compute your savings" src="../images/logo.svg">
+                </figure>
+                <p>
+                  Project Sunroof also compiles the following incentives to calculate your final cost:
+                </p>
+                <ul>
+                  <li>Federal and state tax credits</li>
+                  <li>Utility rebates</li>
+                  <li>Renewable energy credits and net metering</li>
+                </ul>
+                <p>
+                  <a href="../faq/#financial-considerations">
+                    Find out more about Project Sunroof's financial estimates
+                  </a>
+                </p>
+                <footer class="mdl-mini-footer">
+                  <span>April 18, 2016</span>
+                </footer>
+              </section>
+            </div>
+            <div class="newist-section mdl-card__supporting-text">
+              <section>
+                <h3 id="taking-next-steps">Taking next steps</h3>
+                <figure class="align-paragraph">
+                  <img alt="Taking the next steps" src="../images/logo.svg">
+                </figure>
+                <p>
+                  If you'd like to know more or to get started on going solar, Project Sunroof can put you in touch with solar providers who serve your area.
+                </p>
+                <p>
+                  Project Sunroof will only send information you provide to solar providers that you selected.
+                </p>
+                <footer class="mdl-mini-footer">
+                  <span>April 18, 2016</span>
+                </footer>
+              </section>
+            </div>
+          </div>
+          <nav class="demo-nav mdl-cell mdl-cell--12-col">
+            <div class="section-spacer"></div>
+            <div class="newist-nav__button">
+            <a href="newist-layout.html" title="show more">
+              More
+              <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+                <i class="material-icons" role="presentation">arrow_forward</i>
+              </button>
+            </a>
+            </div>
+          </nav>
+        </div>
+      </article>
+    </main>
+    <footer class="mdl-mini-footer">
+      <div class="mdl-mini-footer--left-section">
+        <div class="mdl-logo">
+          <a class="elabo-logo-link" href="/">
+            <img class="elabo-logo"
+               alt="Elabo logo"
+               src="../images/logo.svg">
+          </a>
+          <span class="logo-define">Google App Engine Blog System</span>
+        </div>
+      </div>
+      <div class="mdl-mini-footer--right-section">
+        <div>Copyright ryuji.oike. 2016 All rights reserved.</div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
