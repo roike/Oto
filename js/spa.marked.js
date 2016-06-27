@@ -127,6 +127,13 @@ spa.marked = (() => {
         marked_model.post(domMap.form.action, params);
       }
     },
+
+    postExcert: event => {
+      const form = new FormData(domMap.form);
+      const params = { content: form.get('content') };
+      marked_model.post(domMap.form.action, params);
+    },
+
     //-----dialog handler section------------
     showModal: event => {domMap.dialog.showModal();},
     closeModal: event => {
@@ -392,7 +399,7 @@ spa.marked.excerpt = params => {
             </button>
             <span for="tt2" class="mdl-tooltip">絵文字パレット</span>
             <button type="submit" id="marked-save" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
-              <i class="material-icons">save</i>
+              <i class="material-icons" listener="postExcert">save</i>
             </button>
             <span for="marked-save" class="mdl-tooltip">記事概要の登録</span>
           </div>
