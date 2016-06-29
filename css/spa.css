@@ -120,3 +120,38 @@ nav h2, footer h2 {
 .is-paused {
   animation-play-state: paused;
 }
+
+/*------- github css-----------------*/
+blockquote {
+  margin: 15px 0;
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+blockquote:before, blockquote:after {content: normal;}
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 14px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }

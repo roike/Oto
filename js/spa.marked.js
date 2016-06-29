@@ -29,12 +29,14 @@ spa.marked = (() => {
   //定数はここで宣言
   //公開モジュールを参照する場合はここで宣言
   const marked_model = spa.model.marked;
-  
+  const converter = new showdown.Converter();
+
   //----END SCOPE VARIABLES------------------------------------- 
 
   //------------------- BEGIN UTILITY METHODS ------------------
   const okikae = spa.util.okikae;
   const encodeHTML = spa.util.encodeHTML;
+
   //-------------------- END UTILITY METHODS -------------------
 
   //--------------------- BEGIN DOM METHODS --------------------
@@ -157,11 +159,7 @@ spa.marked = (() => {
   };
 
   const keyupHandler = event => {
-    const
-      content = domMap.content.value,
-      converter = new showdown.Converter();
-
-    converter.setOption('tasklists', true);
+    const content = domMap.content.value;
     domMap.preview.innerHTML = converter.makeHtml(content);
 
   };

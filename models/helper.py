@@ -46,7 +46,7 @@ def convert_to_html(content):
 def sanitizeHtml(value, base_url=None):
     rjs = r'[\s]*(&#x.{1,7})?'.join(list('javascript:'))
     re_scripts = re.compile('(%s)' % rjs, re.IGNORECASE)
-    validTags = 'p i strong b u a h1 h2 h3 h4 h5 h6 pre br img li ul ol table tr td th'.split()
+    validTags = 'p i strong b u a h1 h2 h3 h4 h5 h6 pre br img li ul ol table tr td th figure code blockquote'.split()
     validAttrs = 'href src width height'.split()
     urlAttrs = 'href src'.split() # Attributes which should have a URL
     soup = BeautifulSoup(value, 'lxml')

@@ -14,7 +14,7 @@
 #WSGI micro web-framework--http://bottlepy.org/docs/0.12/index.html
 bottle==0.12.9
 #The fastest markdown parser--https://github.com/lepture/mistune
-mistune==0.7.2
+mistune==0.7.3
 #Pygments is a syntax highlighting package written in Python-->http://pygments.org/
 Pygments
 #GoogleAppEngineCloudStorageClient

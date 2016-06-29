@@ -75,8 +75,8 @@ spa.newist = (() => {
           count ++ || '0', 
           () => {
             const [a, b] = key.split('_');
-            return `/blog/${a}/${b}`;
-          })).join('');
+            return `/blog/${a}/${b}`;}
+          )).join('');
 
     const offset = stateMap.offset + entry_model.list().length;
     //console.info(offset);

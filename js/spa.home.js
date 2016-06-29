@@ -29,13 +29,13 @@ spa.home = (() => {
     domMap = {};
   //定数はここで宣言
   //画面表示の件数
-  const LIST_FETCH = 31
+  const LIST_FETCH = 31;
   //公開モジュールを参照する場合はここで宣言
   const entry_model = spa.model.entry('home');
   //----------------- END MODULE SCOPE VARIABLES ---------------
 
   //------------------- BEGIN UTILITY METHODS ------------------
-  
+
   //-------------------- END UTILITY METHODS -------------------
 
   //--------------------- BEGIN DOM METHODS --------------------
