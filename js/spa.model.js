@@ -41,7 +41,7 @@ spa.model = (() =>{
     //stateMap.user = {id:,name:,anchor:,login_url:}
     const login = pageList => {
       //console.info(urlList);
-      const params = {page: JSON.stringify(pageList)};
+      const params = {page: pageList};
       ajax.post('/login', params)
         .then(response => {
           stateMap.user = response;
@@ -212,7 +212,6 @@ spa.model = (() =>{
             return ajax.post('/channel/list', params);
           }
         },
-        //stateMap.blogのキャッシュを使う
         marked: () => ajax.post(url, params)
       };
 
@@ -224,11 +223,7 @@ spa.model = (() =>{
           //console.info(data);
           stateMap.channel.list = data[0].publish;
           _.extend(stateMap.marked.saved, data[1].publish);
-          let custom_event = 'blog-marked';
-          if (_.has(stateMap.marked.saved, 'excerpt')) {
-            custom_event = 'excerpt-marked';
-          }
-          spa.gevent.publish(custom_event, stateMap.marked.saved);
+          spa.gevent.publish(data[1].custom, stateMap.marked.saved);
         })
         .catch(error => {
           spa.gevent.publish('spa-error', error);

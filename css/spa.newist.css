@@ -37,7 +37,7 @@
 #newist-container figure {
   float: right;
   margin-bottom: 3em;
-  margin-top: -56px;
+  /*margin-top: -16px;*/
   max-height: 200px;
   text-align: center;
   width: 300px;

@@ -93,7 +93,7 @@ def get_blog(abcd, slug):
         response.status = 403
         return {'error': 'Forbidden, No access right.'}
     except Exception as e:
-        loging.info(e)
+        logging.info(e)
         abort(500)
 
 #更新にmarkdownの取り出し--exclude excerpt---
@@ -105,11 +105,11 @@ def get_marked(abcd, slug):
         blog = ndb.Key(Blog, '%s_%s' % (abcd, slug)).get()
         publish = blog.get_marked()
         if request_user == publish.get('nickname'):
-            return {'publish': publish}
+            return {'publish': publish, 'custom': 'blog-marked'}
         response.status = 403
         return {'error': 'Forbidden, No access right.'}
     except Exception as e:
-        loging.info(e)
+        logging.info(e)
         abort(500)
 
 #更新にexcerptの取り出し
@@ -121,11 +121,11 @@ def get_excerpt(abcd, slug):
         blog = ndb.Key(Blog, '%s_%s' % (abcd, slug)).get()
         publish = blog.get_excerpt()
         if request_user == publish.get('nickname'):
-            return {'publish': publish}
+            return {'publish': publish, 'custom': 'excerpt-marked'}
         response.status = 403
         return {'error': 'Forbidden, No access right.'}
     except Exception as e:
-        loging.info(e)
+        logging.info(e)
         abort(500)
 
 #新規にBlogの登録--戻り値は登録キー
@@ -135,7 +135,7 @@ def add_blog():
     try:
         return {'publish': Blog.save_blog(request.forms)}
     except Exception as e:
-        loging.info(e)
+        logging.info(e)
         abort(500)
 
 #Blogの更新--戻り値は登録キー
@@ -146,7 +146,7 @@ def put_blog(abcd, slug):
         blog = ndb.Key(Blog, '%s_%s' % (abcd, slug)).get()
         return {'publish': blog.put_blog(request.forms)}
     except Exception as e:
-        loging.info(e)
+        logging.info(e)
         abort(500)
 
 #excerpt,Postedの登録
@@ -158,7 +158,7 @@ def put_property(abcd, slug, prop):
         return {'publish': blog.put_property(prop, request.forms)}
 
     except Exception as e:
-        loging.info(e)
+        logging.info(e)
         abort(500)
 
 
@@ -175,7 +175,7 @@ def entry_newist():
             cb = 'home'
         return {'publish': Blog.newist(params, cb)}
     except Exception as e:
-        loging.info(e)
+        logging.info(e)
         abort(500)
 
 @bottle.route('/channel/list', method='post')
@@ -187,7 +187,7 @@ def channel_list():
     try:
         return {'publish': Channel.get_list(request_user)}
     except Exception as e:
-        loging.info(e)
+        logging.info(e)
         abort(500)
 
 @bottle.route('/channel/save', method='post')
@@ -198,9 +198,9 @@ def channel_save():
     params.update(request.forms)
     try:
         channel = Channel.put_new(params)
-        return {'publish': Channel.get_list(host)}
+        return {'publish': Channel.get_list(params.get('host'))}
     except Exception as e:
-        loging.info(e)
+        logging.info(e)
         abort(500)
 
 #file upload
@@ -213,7 +213,7 @@ def upload_file():
         filename = write_gcs(upload)
         return dict(filename=filename)
     except Exception as e:
-        loging.info(e)
+        logging.info(e)
         abort(500)
 
 

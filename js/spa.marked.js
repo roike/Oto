@@ -92,7 +92,7 @@ spa.marked = (() => {
     //---container handler section------------
     selectImage: event => {domMap.upload.click();},
     //htmlのsource view切り替え
-    sourceView: (event) => {
+    sourceView: event => {
       if (stateMap.isSource) {
         stateMap.isSource = false;
         keyupHandler();
@@ -256,12 +256,10 @@ spa.marked = (() => {
   // Begin public method /initModule/
   const initModule = container => {
     stateMap.container = container;
-    
 
     //編集ページがある
     if(configMap.anchor.page.length > 1) {
       // subscribe to custom_event
-      let select
       spa.gevent.subscribe(stateMap.container, 'blog-marked', onLoadBlog);
       spa.gevent.subscribe(stateMap.container, 'excerpt-marked', onLoadExcerpt);
       marked_model.edit('/' + configMap.anchor.page.join('/'));

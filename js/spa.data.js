@@ -2,7 +2,7 @@
  * template spa.data.js
  * Copyright 2016 ryuji.oike@gmail.com
  *-----------------------------------------------------------------
- * version:1.04
+ * updated:2016-07-27
 */
 
 /*jslint         browser : true, continue : true,
@@ -22,53 +22,35 @@ spa.data = (() => {
       
     //paramsがない場合はnull
     const encodedString = params => {
-      return _.keys(params).map(key => 
-          [key ,encodeURIComponent(params[key])].join('=')
+      return _.keys(params).map(key => {
+          let val = params[key];
+          if(_.isObject(val)) val = JSON.stringify(val);
+          return [key ,encodeURIComponent(val)].join('=');
+        }
       ).join('&');
     };
-
-    const ajaxGet = (url, params) => {
-      return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        if (params) {
-          url += '?' + encodedString(params);
-        }
-        //console.info(url);
-        xhr.open('GET', url, true);
-        xhr.onload = () => {
-          if (xhr.status === 200) {
-            resolve(JSON.parse(xhr.response));
-          } else if (xhr.status === 403) {
-            const response = JSON.parse(xhr.response);
-            reject(response.error);
-          } else {
-            //status==500はここでキャッチ
-            reject(xhr.statusText);
-          }
-        };
-        xhr.onerror = () => {
-          reject(xhr.statusText);
-        };
-        xhr.send();
-      });
-    };
-
-    const ajaxPost = (url, params) => {
-      //console.info(url);
+    
+    const makeRequest = opts => {
+      //console.info(opts.url);
       return new Promise( (resolve, reject) => {
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', url, true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-        xhr.send(encodedString(params));
+        xhr.open(opts.method, opts.url, true);
+
+        _.keys(opts.headers).forEach(key => {
+          xhr.setRequestHeader(key, opts.headers[key]);
+        });
+        //console.info(opts.params);
+        xhr.send(opts.params);
         xhr.onload = () => {
           //console.info(xhr.status);
-          if (xhr.status === 200) {
+          if(xhr.status >= 200 && xhr.status < 300) {
             resolve(JSON.parse(xhr.response));
           } else if (xhr.status === 403) {
             const response = JSON.parse(xhr.response);
             reject(response.error);
           } else {
             //status==500はここでキャッチ
+            console.info(xhr.response);
             reject(xhr.statusText);
           }
         };
@@ -76,6 +58,57 @@ spa.data = (() => {
           console.info(xhr.statusText);
           reject(xhr.statusText);
         };
+      });
+    };
+
+    const ajaxGet = (url, params) => {
+      return makeRequest({
+        method: 'GET',
+        url: url,
+        params: encodedString(params),
+        headers: {}
+      });
+    };
+
+    const ajaxDelete = (url, params) => {
+      return makeRequest({
+        method: 'DELETE',
+        url: url,
+        params: encodedString(params),
+        headers: {}
+      });
+    };
+
+    const ajaxPost = (url, params) => {
+      return makeRequest({
+        method: 'POST',
+        url: url,
+        params: encodedString(params),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        }
+      });
+    };
+
+    const ajaxPatch = (url, params) => {
+      return makeRequest({
+        method: 'PATCH',
+        url: url,
+        params: JSON.stringify(params),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8'
+        }
+      });
+    };
+
+    const ajaxPostByJson = (url, params) => {
+      return makeRequest({
+        method: 'POST',
+        url: url,
+        params: JSON.stringify(params),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8'
+        }
       });
     };
 
@@ -104,7 +137,10 @@ spa.data = (() => {
 
     return {
       get: ajaxGet,
+      delete: ajaxDelete,
+      patch: ajaxPatch,
       post: ajaxPost,
+      json: ajaxPostByJson,
       up: imgLoad
     };
 

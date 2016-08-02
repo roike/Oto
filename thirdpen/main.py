@@ -22,7 +22,7 @@ bottle = Bottle()
 debug(True)
 
 #------------Note--------------
-#urlがeloabo-oneを叩くことはないので、Bookmark対応おびAnchorのfilterはthird-penでかける
+#urlがeloabo-oneを叩くことはないので、Bookmark対応おびAnchorのfilterはthirdpenでかける
 #但し、dwload_imageは現状、eloabo-oneを直接叩くので改善必要
 
 #-------decorator section-------------------------
@@ -31,7 +31,7 @@ def allow_cors(func):
 
         #print "this is a decorator which enable CORS for specified endpoint."
         #Don't use the wildcard '*' for Access-Control-Allow-Origin in production.
-        response.headers['Access-Control-Allow-Origin'] = 'https://third-pen.com'
+        response.headers['Access-Control-Allow-Origin'] = 'https://thirdpen.com'
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT'
         response.headers['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, X-Requested-With, X-CSRF-Token'
 
@@ -55,6 +55,8 @@ def allow_access(func):
     return wrapper
 
 #---------------------------------------------
+#channelとプロジェクトIDを一致させて照合するのは不便
+#修正必要
 @bottle.route('/thirdpen/inbound')
 def get_token():
     incoming_app_id = request.headers.get('X-Appengine-Inbound-Appid', None)
@@ -94,7 +96,7 @@ def fetch_blog(abcd, slug):
         return {'publish': blog.get_blog()}
 
     except Exception as e:
-        loging.error(e)
+        logging.error(e)
         abort(500)
 
 @bottle.route('/thirdpen/newist', method='post')
