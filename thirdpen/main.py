@@ -99,17 +99,18 @@ def fetch_blog(abcd, slug):
         logging.error(e)
         abort(500)
 
-@bottle.route('/thirdpen/newist', method='post')
+#channel= tech,think,github,home
+@bottle.route('/thirdpen/<channel>', method='post')
 @allow_cors
 @allow_access
-def entry_newist():
+def entry_newist(channel):
     try:
         params = {'posted': True}
         params.update(request.forms)
-        cb = 'entry'
-        if params['channel'] == 'home':
-            cb = 'home'
-        return {'publish': Blog.newist(params, cb)}
+        call_back = 'entry'
+        if channel == 'home':
+            call_back = 'home'
+        return {'publish': Blog.newist(params, call_back)}
     except Exception as e:
         logging.error(e)
         abort(500)

@@ -97,7 +97,7 @@ class Blog(ndb.Model):
     #データproperty-------------------------------------
     #self.key=<abcdef>_slug
     channel_key = ndb.KeyProperty(kind=Channel)
-    #--ndb.UserPropertyは使わないが推薦されている<--docs.User Objects
+    #--ndb.UserPropertyは使わない,が推薦されている<--docs.User Objects
     poster = ndb.StringProperty()
     title = ndb.StringProperty(indexed=False)
     slug = ndb.StringProperty(default=None, indexed=False)
@@ -215,7 +215,7 @@ class Blog(ndb.Model):
 
     #チャネル毎の新着ブログ取り出し-------------------
     @classmethod
-    def newist(cls, params, cb='entry'):
+    def newist(cls, params, call_back='entry'):
         logging.info(params)
         offset = int(params.get('offset'))
         channel = params.get('channel')
@@ -268,7 +268,7 @@ class Blog(ndb.Model):
             query = query.filter(cls.posted==True)
         query = query.order(-cls.post_date_update)
 
-        call_back = format_data()[cb]
+        call_back = format_data()[call_back]
         return map(call_back, query.fetch(line, offset=offset))
 
 
