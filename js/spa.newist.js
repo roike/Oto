@@ -60,7 +60,7 @@ spa.newist = (() => {
     const newist = event.detail;
     let count = 0;
     domMap.newist.innerHTML = newist.map(
-        ({key, title, excerpt, channel, date, tags, posted}) =>
+        ({key, title, excerpt, channel, date, initdate, tags, posted}) =>
         okikae(
           `<div class="newist-section mdl-card__supporting-text">
            <section row="%s">
@@ -68,6 +68,7 @@ spa.newist = (() => {
              <p>${excerpt}</p>
              <footer class="mdl-mini-footer">
                <span><a href="/newist/${tags}">${tags}</a> | ${date}</span>
+               <span>初稿${initdate}</span>
                <span listener="onPost">${posted}</span><span>${channel}</span>
              </footer>
            </section>

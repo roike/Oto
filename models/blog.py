@@ -229,8 +229,11 @@ class Blog(ndb.Model):
             def entry(entity):
                 #logging.info(entity.title)
                 update = entity.post_date_update
+                addate = entity.post_date_add
                 y, m, d = update.year, update.month, update.day
+                y2, m2, d2 = addate.year, addate.month, addate.day
                 m_name = calendar.month_name[m]
+                m2_name = calendar.month_name[m2]
                 posted = u'Draft'
                 if entity.posted: posted = u'Post'
                 excerpt = u'記事概要はありません'
@@ -243,6 +246,7 @@ class Blog(ndb.Model):
                     'excerpt': excerpt,
                     'channel': entity.channel_key.string_id(),
                     'date': '%s %s, %s' % (m_name, d, y),
+                    'initdate': '%s %s, %s' % (m2_name, d2, y2),
                     'posted': posted
                 }
 
