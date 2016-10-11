@@ -137,7 +137,7 @@ spa.model = (() =>{
       ajax.post('/channel/save', params)
         .then(data => {
           stateMap.channel.list = data.publish;
-          spa.gevent.publish('change-channel', stateMap.channel.list);
+          spa.gevent.publish('change-channel-list', stateMap.channel.list);
         })
         .catch(error => {
           spa.gevent.publish('spa-error', error);
@@ -150,13 +150,13 @@ spa.model = (() =>{
         ajax.post('/channel/list', {'user_id': stateMap.user.id})
           .then(data => {
             stateMap.channel.list = data.publish;
-            spa.gevent.publish('change-channel', stateMap.channel.list);
+            spa.gevent.publish('change-channel-list', stateMap.channel.list);
           })
           .catch(error => {
             spa.gevent.publish('spa-error', error);
           });
       } else {
-        spa.gevent.publish('change-channel', stateMap.channel.list);
+        spa.gevent.publish('change-channel-list', stateMap.channel.list);
       }
     };
 
@@ -199,6 +199,21 @@ spa.model = (() =>{
         });
     };
     
+    const listChannel = () => {
+      if (!stateMap.channel.list) {
+        ajax.post('/channel/list', {'user_id': stateMap.user.id})
+          .then(data => {
+            stateMap.channel.list = data.publish;
+            spa.gevent.publish('new-marked', stateMap.channel.list);
+          })
+          .catch(error => {
+            spa.gevent.publish('spa-error', error);
+          });
+      } else {
+        spa.gevent.publish('new-marked', stateMap.channel.list);
+      }
+    };
+
     //select = blog or excerptのデータDload
     const edit = url => {
       const params = {user_id: stateMap.user.id};
@@ -217,7 +232,7 @@ spa.model = (() =>{
 
       const main = () => Promise.all([request.channels(), request.marked()]);
 
-      //publish=blog-marked or excerpt-marked
+      //publish=edit-marked or excerpt-marked
       main()
         .then(data => {
           //console.info(data);
@@ -240,6 +255,7 @@ spa.model = (() =>{
       edit: edit,
       message: alertMessage,
       upload: file => ajax.up('/marked/upload', file),
+      channelList: listChannel,
       channels: () => stateMap.channel.list
     };
   })();

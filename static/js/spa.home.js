@@ -82,7 +82,7 @@ spa.home = (() => {
     setDomMap();
     
     // subscribe to custom_event
-    spa.gevent.subscribe( stateMap.container, 'change-home', onChangeHome);
+    spa.gevent.subscribe( 'spa', 'change-home', onChangeHome);
     
     //mdlイベントの再登録
     componentHandler.upgradeDom();

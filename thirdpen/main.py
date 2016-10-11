@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # project: elabo-one
 # module: thirdpen.main 
-# Copyright 2016 ryuji.oike@gmail.com
+# See License
 # --------------------------------------------------------
 
 from google.appengine.ext import ndb
@@ -94,7 +94,6 @@ def fetch_blog(abcd, slug):
     try:
         blog = ndb.Key(Blog, '%s_%s' % (abcd, slug)).get()
         return {'publish': blog.get_blog()}
-
     except Exception as e:
         logging.error(e)
         abort(500)

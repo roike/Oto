@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # elabo-one main
-# Copyright 2016 ryuji.oike@gmail.com
+# See License
 # --------------------------------------------------------
 
 from google.appengine.api import users, taskqueue
@@ -43,7 +43,7 @@ def dwload_image(filename):
 @bottle.route('/<anchor>/<action>/<abcd>/<slug>/<prop>')
 def init_anchor(anchor='home', action=None, abcd=None, slug=None, prop=None):
     if anchor in ['home', 'marked', 'channel', 'newist', 'blog' ]:
-        return static_file('editor.html', root='./')
+        return static_file('editor.html', root='./static')
 
     abort(404, 'Sorry, Nothing at this URL.')
 
@@ -105,7 +105,7 @@ def get_marked(abcd, slug):
         blog = ndb.Key(Blog, '%s_%s' % (abcd, slug)).get()
         publish = blog.get_marked()
         if request_user == publish.get('nickname'):
-            return {'publish': publish, 'custom': 'blog-marked'}
+            return {'publish': publish, 'custom': 'edit-marked'}
         response.status = 403
         return {'error': 'Forbidden, No access right.'}
     except Exception as e:

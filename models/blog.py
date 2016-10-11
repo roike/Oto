@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # elabo-one models.blog
-# Copyright 2016 ryuji.oike@gmail.com
+# See License
 # --------------------------------------------------------
 
 #from datetime import date, timedelta
 from google.appengine.ext import ndb
-from datetime import date
 import random, logging, calendar
 #local module----------------------------
 from helper import convert_to_html, append_tag_property, sanitizeHtml, wrap_img
@@ -115,7 +114,6 @@ class Blog(ndb.Model):
     posted = ndb.BooleanProperty(default=False)
     #記事の削除flag=Trueで記事が削除された
     delete_flag = ndb.BooleanProperty(default=False)
-
     #property cache
 
     #--------------パーマンリンクの作成は不要かも？----------------
@@ -132,6 +130,7 @@ class Blog(ndb.Model):
         m_name = calendar.month_name[m]
         return {
                 'key': self.key.string_id(),
+                'channel': self.channel_key.string_id(),
                 'nickname': self.poster, 
                 'title': self.title,
                 'tags': self.tags[0],

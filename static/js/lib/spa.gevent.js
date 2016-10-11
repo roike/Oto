@@ -1,7 +1,8 @@
 /*
  * template spa.gevent.js
- * Copyrighted by ryuji.oike@gmail.com
+ * See License
  * -----------------------------------------------------------------
+ * 2016-10-08 updated
 */
 
 /*jslint         browser : true, continue : true,
@@ -15,14 +16,15 @@
 spa.gevent = (() => {
   'use strict';
     //---------------- BEGIN MODULE SCOPE VARIABLES --------------
-  let customSubMap = {};
+  const customEventDict = {};
+  const eventTarget = {};
 
   //----------------- END MODULE SCOPE VARIABLES ---------------
 
   //------------------- BEGIN PUBLIC METHODS -------------------
   const publishEvent = (event_name, data) => {
 
-    const event_obj  = customSubMap[ event_name ];
+    const event_obj  = eventTarget[customEventDict[ event_name ]];
 
     if ( ! event_obj ) { return false; }
 
@@ -32,30 +34,36 @@ spa.gevent = (() => {
     return true;
   };
 
-  //--event_nameは競合不可
-  const subscribeEvent = function ( collection, event_name, fn ) {
+  //event_nameは競合不可
+  const subscribeEvent = function ( id, event_name, fn ) {
     //console.info('bind collection %s', collection);
-    if ( customSubMap[ event_name ] ){
-      delete customSubMap[ event_name ];
+    if ( _.has(customEventDict, event_name) ){
+      delete customEventDict[ event_name ];
     }
 
-    collection.addEventListener( event_name, fn );
+    eventTarget[id].addEventListener( event_name, fn );
 
-    customSubMap[ event_name ] = collection;
+    customEventDict[ event_name ] = id;
+    //console.info(customEventDict);
   };
 
-  const unsubscribeEvent = function ( collection, event_name ) {
-    if ( ! customSubMap[ event_name ] ){ return false; }
-
-    delete customSubMap[ event_name ];
+  const unsubscribeEvent = function ( id, event_name ) {
+    if ( _.has(customEventDict, event_name) ){
+      delete customEventDict[ event_name ];
+    }
 
     return true;
   };
 
+  const initModule = (id, dom) => {
+    //Set eventTarget for CustomEvent
+    eventTarget[id] = dom;
+  };
   //------------------- END PUBLIC METHODS ---------------------
 
   // return public methods
   return {
+    initModule: initModule,
     publish     : publishEvent,
     subscribe   : subscribeEvent,
     unsubscribe : unsubscribeEvent

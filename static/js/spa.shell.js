@@ -1,7 +1,7 @@
 /*
  * project: elabo-one
  * spa.shell.js
- * Copyright 2016 ryuji.oike@gmail.com
+ * See License
  * -----------------------------------------------------------------
 */
 
@@ -224,21 +224,19 @@ spa.shell = (() => {
   const initModule = () => {
     //ルーティング対象はすべてmoduleMapに組み込む
     moduleMap.error = spa.error;
-    moduleMap.home = spa.home;
-    moduleMap.marked = spa.marked;
-    moduleMap.channel = spa.channel;
-    moduleMap.newist = spa.newist;
-    moduleMap.blog = spa.blog;
-
-
+    _.each(anchor_schema, ele => {
+      moduleMap[ele] = spa[ele];
+    });
     stateMap.container = document.getElementById('spa');
+
     setDomMap();
 
     //グローバルカスタムイベントのバインド
-    spa.gevent.subscribe( stateMap.container, 'spa-login',  onLogin  );
-    spa.gevent.subscribe( stateMap.container, 'spa-logout', onLogout );
-    spa.gevent.subscribe( stateMap.container, 'spa-error', onError );
-    spa.gevent.subscribe( stateMap.container, 'spa-message', onMessage);
+    spa.gevent.initModule('spa', stateMap.container);
+    spa.gevent.subscribe( 'spa', 'spa-login',  onLogin  );
+    spa.gevent.subscribe( 'spa', 'spa-logout', onLogout );
+    spa.gevent.subscribe( 'spa', 'spa-error', onError );
+    spa.gevent.subscribe( 'spa', 'spa-message', onMessage);
 
     // ローカルイベントのバインド
     document.addEventListener('click', handleAnchorClick, false);

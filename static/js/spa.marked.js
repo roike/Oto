@@ -68,9 +68,6 @@ spa.marked = (() => {
 
   const initPage = () => {
     setDomMap();
-    //グローバルカスタムイベントのバインド
-    spa.gevent.subscribe(domMap.container, 'save-marked', onSaved  );
-    
     //ローカルイベントのバインド
     domMap.upload.addEventListener('change', upLoad, false);
     domMap.content.addEventListener('keyup', keyupHandler, false);
@@ -207,10 +204,8 @@ spa.marked = (() => {
 
   //新規更新ともtemplateに埋め込むのは次の8箇所
   //[url, title, tags, slug, channel, channel_list, content, 前画面(blog) ]
-  const onLoadBlog = event => {
+  const onLoadMarked = event => {
     stateMap.channelList = marked_model.channels().map(({name}) => name);
-    if(_.indexOf(stateMap.channelList, 'sample') === -1)
-      stateMap.channelList.push('sample');
 
     const {key, title, tags, content, channel, excerpt} = event.detail;
     const [prev, slug] = key.split('_');
@@ -256,19 +251,22 @@ spa.marked = (() => {
   // Begin public method /initModule/
   const initModule = container => {
     stateMap.container = container;
+    //グローバルカスタムイベントのバインド
+    spa.gevent.subscribe('spa', 'edit-marked', onLoadMarked);
+    spa.gevent.subscribe('spa', 'excerpt-marked', onLoadExcerpt);
+    spa.gevent.subscribe('spa', 'new-marked', onLoadTemplate  );
+    spa.gevent.subscribe('spa', 'save-marked', onSaved  );
 
-    //編集ページがある
     if(configMap.anchor.page.length > 1) {
-      // subscribe to custom_event
-      spa.gevent.subscribe(stateMap.container, 'blog-marked', onLoadBlog);
-      spa.gevent.subscribe(stateMap.container, 'excerpt-marked', onLoadExcerpt);
+      //編集ページがある
       marked_model.edit('/' + configMap.anchor.page.join('/'));
     } else {
       //custom-event--テンプレートの読み込み
-      spa.gevent.subscribe(stateMap.container, 'change-channel', onLoadTemplate  );
       //channel選択肢の埋め込み
-      spa.model.channel.list();
+      //新規ページ
+      marked_model.channelList();
     }
+    
 
   };
 
@@ -342,7 +340,7 @@ spa.marked.template = params => {
               <span for="marked-settings" class="mdl-tooltip">投稿の設定</span>
             </div>
             <div class="marked-body mdl-textfield mdl-js-textfield">
-              <textarea name="content" id="marked-body" class="mdl-textfield__input" type="text" rows="40" >${content}</textarea>
+              <textarea name="content" id="marked-body" class="mdl-textfield__input" type="text" rows="40">${content}</textarea>
               <label class="mdl-textfield__label" for="marked-body">本文</label>
             </div>
           </div>

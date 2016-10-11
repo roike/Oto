@@ -125,7 +125,7 @@ spa.newist = (() => {
     setDomMap();
     
     // subscribe to custom_event
-    spa.gevent.subscribe( stateMap.container, 'change-newist', onChangeNewist);
+    spa.gevent.subscribe( 'spa', 'change-newist', onChangeNewist);
     
     //ローカルイベントのバインド
     stateMap.container.addEventListener('click', clickHandler, false);

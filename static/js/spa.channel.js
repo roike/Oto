@@ -118,7 +118,7 @@ spa.channel = (() => {
     setDomMap();
     
     // subscribe to custom_event
-    spa.gevent.subscribe( stateMap.container, 'change-channel', onChangeChannel);
+    spa.gevent.subscribe( 'spa', 'change-channel-list', onChangeChannel);
     
     //ローカルイベントのバインド
     domMap.save.addEventListener('click', saveChannel);

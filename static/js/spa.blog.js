@@ -75,7 +75,7 @@ spa.blog = (() => {
     stateMap.container = container;
 
     //グローバルカスタムイベントのバインド
-    spa.gevent.subscribe( stateMap.container, 'load-blog',  onLoad  );
+    spa.gevent.subscribe( 'spa', 'load-blog',  onLoad  );
 
     blog_model.load('/' + configMap.anchor.page.join('/'));
 

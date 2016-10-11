@@ -1,5 +1,5 @@
 application: elabo-one
-version: 1-39
+version: 1-42
 runtime: python27
 api_version: 1
 threadsafe: yes
@@ -29,20 +29,21 @@ skip_files:
 - ^(.*/)?\..*$
 #the above list is default
 - ^(.*/)?.*\.[tc]sv$
-- ^(.*/)?.*/test/.*$
-- ^(.*/)?.*/layout/.*$
+- ^test$
+- ^layout$
 
 handlers:
 # App Engine serves and caches static files contained in the listed directories
 # (and subdirectories). Uncomment and set the directory as needed.
+- url: /icon.png
+  static_files: static/images/icon.png
+  upload: static/images/icon.png
 - url: /css
-  static_dir: css
-  mime_type: text/css
-- url: /js
-  static_dir: js
-  mime_type: text/javascript
+  static_dir: static/css
 - url: /images
-  static_dir: images
+  static_dir: static/images
+- url: /js
+  static_dir: static/js
 - url: /test/.*
   script: main.bottle
   login: admin
