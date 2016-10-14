@@ -1,6 +1,6 @@
 /*
  * elabo spa.css
- * ryuji.oike@gmail.com
+ * See License
  * h1はセクショニングルートに一つ
  * セクションの見出しはh2で開始する
 */
@@ -42,34 +42,20 @@ html, body, th, td, p, h1, h2, h3, h4, h5, h6 {
   font-size: 14px;
 }
 
-html, body, th, td, p {
-  color: #757575;
-  font-size: 14px;
-}
+
 
 h1, h2, h3, h4, h5, h6 {
   margin: 5px 0;
   color: #616161;
 }
 
-h1 {
-  font-size: 3rem;
-}
-h2 {
-  font-size: 1.7rem;
-}
-h3 {
-  font-size: 1.5rem;
-}
-h4 {
-  font-size: 1.2rem;
-}
-h5 {
-  font-size: 1rem;
-}
-h6 {
-  font-size: 1rem;
-}
+h1 {font-size: 3rem;}
+h2 {font-size: 1.7rem;}
+h3 {font-size: 1.5rem;}
+h4 {font-size: 1.2rem;}
+h5 {font-size: 1rem;}
+h6 {font-size: 1rem;}
+
 header h1 {
   line-height: 0;
 }

@@ -248,8 +248,6 @@ spa.shell = (() => {
     //window.addEventListener('resize', onResize);
     window.addEventListener('popstate', onPopstate);
 
-    window.dispatchEvent(new Event('popstate'));
-
   };
 
   
