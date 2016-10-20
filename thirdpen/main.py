@@ -15,6 +15,7 @@ from controllers.blog import read_gcs
 from models.blog import Channel, Blog
 
 FORMATS = dict(jpg='image/jpeg', png='image/png', gif='image/gif')
+APPID = 'third-pen'
 
 # Create the Bottle WSGI application.
 
@@ -32,28 +33,34 @@ def allow_cors(func):
         #print "this is a decorator which enable CORS for specified endpoint."
         #Don't use the wildcard '*' for Access-Control-Allow-Origin in production.
         response.headers['Access-Control-Allow-Origin'] = 'https://thirdpen.com'
-        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT'
-        response.headers['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, X-Requested-With, X-CSRF-Token'
-
+        response.headers['Access-Control-Allow-Methods'] = 'GET'
+        #response.headers['Access-Control-Allow-Headers'] = 'Origin,Accept,Content-Type,X-Requested-With,X-CSRF-Token'
+        response.headers['Access-Control-Allow-Headers'] = 'Origin, Accept,Content-Type, Authorization'
         return func(*args, **kwargs)
 
     return wrapper
 
 def allow_access(func):
     def wrapper(*args, **kwargs):
-        appid = request.forms.get('appid')
-        token_call = request.forms.get('token')
-        token = memcache.get(appid)
+        token_call = request.headers.get('Authorization').split()[1]
+        token = memcache.get(APPID)
         if token == token_call:
             return func(*args, **kwargs)
 
         #if token is None or token != token_call:
-        response.status = 403
+        response.status = 401
         #response.content_type = 'application/json; charset=utf-8'
-        return {'error': 'Forbidden, No access right.', 'status': '403'}
+        return {'error': 'invalid_token', 'status': '401'}
 
     return wrapper
 
+@bottle.route('/thirdpen/<:re:.*>', method='OPTIONS')
+def enable_options_route():
+    print 'Generic regex route'
+    response.headers['Access-Control-Allow-Origin'] = 'https://thirdpen.com'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = 'Origin, Accept,Content-Type, Authorization'
+    response.headers['Access-Control-Max-Age'] = 86400
 #---------------------------------------------
 #channelとプロジェクトIDを一致させて照合するのは不便
 #修正必要
@@ -87,7 +94,7 @@ def dwload_image(filename):
 
 
 #---dynamic module section---------------------
-@bottle.route('/thirdpen/blog/<abcd>/<slug>', method='post')
+@bottle.route('/thirdpen/blog/<abcd>/<slug>')
 @allow_cors
 @allow_access
 def fetch_blog(abcd, slug):
@@ -99,13 +106,18 @@ def fetch_blog(abcd, slug):
         abort(500)
 
 #channel= tech,think,github,home
-@bottle.route('/thirdpen/<channel>', method='post')
+@bottle.route('/thirdpen/<channel>/<tag>/<offset>')
 @allow_cors
 @allow_access
-def entry_newist(channel):
+def entry_newist(channel, tag, offset):
     try:
-        params = {'posted': True}
-        params.update(request.forms)
+        params = {
+                'posted': True,
+                'channel': channel,
+                'tags': tag,
+                'fetch': request.query.get('fetch'),
+                'offset': offset
+                }
         call_back = 'entry'
         if channel == 'home':
             call_back = 'home'
