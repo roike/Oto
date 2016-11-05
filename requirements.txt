@@ -12,7 +12,7 @@
 #However causes the virtualenv command to break.
 #----------------------
 #WSGI micro web-framework--http://bottlepy.org/docs/0.12/index.html
-bottle==0.12.9
+bottle==0.12.10
 #The fastest markdown parser--https://github.com/lepture/mistune
 mistune==0.7.3
 #Pygments is a syntax highlighting package written in Python-->http://pygments.org/
@@ -21,5 +21,7 @@ Pygments
 GoogleAppEngineCloudStorageClient
 #HTML or XML parser--https://pypi.python.org/pypi/beautifulsoup4-->In case pip install -t lib beautifulsoup4
 beautifulsoup4
+#Json Web Token
+#pyjwt
 #if pip is updated, then pip install --upgrade pip setuptools
 

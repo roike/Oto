@@ -1,6 +1,7 @@
 /*
  * project: elabo-one
  * spa.blog.js
+ * See License
  *-----------------------------------------------------------------
 */
 
@@ -33,7 +34,7 @@ spa.blog = (() => {
 
   //------------------- BEGIN UTILITY METHODS ------------------
   //-------------------- END UTILITY METHODS -------------------
-
+  const converter = new showdown.Converter({extensions: ['mathExt']});
   //--------------------- BEGIN DOM METHODS --------------------
   //DOMメソッドにはページ要素の作成と操作を行う関数を配置
   const setDomMap = () => {
@@ -48,7 +49,9 @@ spa.blog = (() => {
     const embed = event.detail;
     const previous = configMap.previous;
     embed['before'] = previous ? '/' + previous.join('/') : '';
+    embed.content = converter.makeHtml(embed.content);
     stateMap.container.innerHTML = spa.blog.template(embed);
+    spa.mathjax.update();
     if (!previous){
       stateMap.container.getElementsByClassName('blog-nav')[0].style.display = 'none';
     }
@@ -91,6 +94,7 @@ spa.blog = (() => {
 
 spa.blog.template = ({key, tags, date, title, content, before}) => {
   const [prev, slug] = key.split('_');
+  
   return `
   <article id="blog-container">
     <div class="blog-content mdl-grid">

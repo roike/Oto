@@ -37,7 +37,7 @@ spa.newist = (() => {
   //----END SCOPE VARIABLES------------------------------------- 
 
   //------------------- BEGIN UTILITY METHODS ------------------
-  const okikae = spa.util.okikae;
+  const converter = new showdown.Converter({extensions: ['mathExt']});
   //-------------------- END UTILITY METHODS -------------------
 
   //--------------------- BEGIN DOM METHODS --------------------
@@ -60,31 +60,29 @@ spa.newist = (() => {
     const newist = event.detail;
     let count = 0;
     domMap.newist.innerHTML = newist.map(
-        ({key, title, excerpt, channel, date, initdate, tags, posted}) =>
-        okikae(
-          `<div class="newist-section mdl-card__supporting-text">
-           <section row="%s">
-             <h3><a href="%s">${title}</a></h3>
-             <p>${excerpt}</p>
+      ({key, title, excerpt, channel, date, initdate, tags, posted}) => {
+        let [a, b] = key.split('_');
+        excerpt = converter.makeHtml(excerpt);
+        return `
+          <div class="newist-section mdl-card__supporting-text">
+           <section row="${count ++}">
+             <h3><a href="/blog/${a}/${b}">${title}</a></h3>
+             ${excerpt}
              <footer class="mdl-mini-footer">
                <span><a href="/newist/${tags}">${tags}</a> | ${date}</span>
                <span>初稿${initdate}</span>
                <span listener="onPost">${posted}</span><span>${channel}</span>
              </footer>
            </section>
-          </div>`,
-          count ++ || '0', 
-          () => {
-            const [a, b] = key.split('_');
-            return `/blog/${a}/${b}`;}
-          )).join('');
+          </div>`;
+        }).join('');
 
     const offset = stateMap.offset + entry_model.list().length;
     //console.info(offset);
     if (offset === stateMap.offset || offset % LIST_FETCH > 0) {
       domMap.more.innerText = 'No More';
     } else {
-      domMap.more.href = okikae('/newist/%s/%s', stateMap.tags, offset);
+      domMap.more.href = `/newist/stateMap.tags/${offset}`;
       stateMap.offset = offset;
     }
   };

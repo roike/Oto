@@ -69,7 +69,10 @@ spa.shell = (() => {
     }
     return idx == 0 ? null : stateMap.anchor_map[idx-1].split('_');
   };
-
+  //set extension to showdownjs
+  spa.showdownext.set();
+  //set mathjax
+  spa.mathjax.init();
   //--------------------- END UTILITY METHODS ------------------
 
   //--------------------- BEGIN DOM METHODS --------------------

@@ -56,7 +56,6 @@ def allow_access(func):
 
 @bottle.route('/thirdpen/<:re:.*>', method='OPTIONS')
 def enable_options_route():
-    print 'Generic regex route'
     response.headers['Access-Control-Allow-Origin'] = 'https://thirdpen.com'
     response.headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
     response.headers['Access-Control-Allow-Headers'] = 'Origin, Accept,Content-Type, Authorization'

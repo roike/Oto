@@ -8,9 +8,9 @@
 from google.appengine.ext import ndb
 import random, logging, calendar
 #local module----------------------------
-from helper import convert_to_html, append_tag_property, sanitizeHtml, wrap_img
+#from helper import convert_to_html, append_tag_property, sanitizeHtml, wrap_img
 
-CHANNEL_NAME_REGEX = r'[-a-z0-9]+'
+#CHANNEL_NAME_REGEX = r'[-a-z0-9]+'
 ALPHABETS = u'abcdefghijklnmopqrstuvwxyz'
 
 class Channel(ndb.Model):
@@ -134,7 +134,7 @@ class Blog(ndb.Model):
                 'nickname': self.poster, 
                 'title': self.title,
                 'tags': self.tags[0],
-                'content': self.content_html,
+                'content': self.content_markdown,
                 'date': '%s %s, %s' % (m_name, d, y)
                 }
         
@@ -166,8 +166,8 @@ class Blog(ndb.Model):
         self.content_markdown = params.get('content')
         self.poster = params.get('user_id')
         #markdown->html変換する->imgをfigureでwrapする
-        self.content_html = wrap_img(sanitizeHtml(convert_to_html(self.content_markdown)))
-        
+        #self.content_html = wrap_img(sanitizeHtml(convert_to_html(self.content_markdown)))
+        #表示する際にshowdownjsで変換したhtmlを使う
         blog_key = self.put()
         return blog_key.string_id()
 
@@ -179,8 +179,8 @@ class Blog(ndb.Model):
         else:
             self.excerpt_markdown = params.get('content')
             #markdown->html変換する->imgをfigureでwrapする
-            self.excerpt_html = wrap_img(sanitizeHtml(convert_to_html(self.excerpt_markdown)))
-
+            #self.excerpt_html = wrap_img(sanitizeHtml(convert_to_html(self.excerpt_markdown)))
+            #表示する際にshowdownjsで変換したhtmlを使う
         blog_key = self.put()
         return blog_key.string_id()
 
@@ -207,8 +207,8 @@ class Blog(ndb.Model):
         blog.content_markdown = params.get('content')
         blog.poster = params.get('user_id')
         #markdown->html変換する->imgをfigureでwrapする
-        blog.content_html = wrap_img(sanitizeHtml(convert_to_html(blog.content_markdown)))
-        
+        #blog.content_html = wrap_img(sanitizeHtml(convert_to_html(blog.content_markdown)))
+        #表示する際にshowdownjsで変換したhtmlを使う
         blog_key = blog.put()
         return blog_key.string_id()
 
@@ -236,7 +236,7 @@ class Blog(ndb.Model):
                 posted = u'Draft'
                 if entity.posted: posted = u'Post'
                 excerpt = u'記事概要はありません'
-                if entity.excerpt_html: excerpt = entity.excerpt_html
+                if entity.excerpt_markdown: excerpt = entity.excerpt_markdown
                 return {
                     'key': entity.key.string_id(),
                     'title': entity.title,

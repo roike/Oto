@@ -1,7 +1,7 @@
 /*
  * project: elabo-one
  * spa.marked.js
- * Copyright 2016 ryuji.oike@gmail.com
+ * See License
  *-----------------------------------------------------------------
 */
 
@@ -29,14 +29,11 @@ spa.marked = (() => {
   //定数はここで宣言
   //公開モジュールを参照する場合はここで宣言
   const marked_model = spa.model.marked;
-  const converter = new showdown.Converter();
-
   //----END SCOPE VARIABLES------------------------------------- 
 
   //------------------- BEGIN UTILITY METHODS ------------------
-  const okikae = spa.util.okikae;
   const encodeHTML = spa.util.encodeHTML;
-
+  const converter = new showdown.Converter({extensions: ['mathExt']});
   //-------------------- END UTILITY METHODS -------------------
 
   //--------------------- BEGIN DOM METHODS --------------------
@@ -107,7 +104,6 @@ spa.marked = (() => {
             name => [name, encodeHTML(form.get(name))||''])
       );
       params['content'] = form.get('content');
-
       const mesData = {
         top: '70px',
         left: '100px',
@@ -129,7 +125,10 @@ spa.marked = (() => {
 
     postExcert: event => {
       const form = new FormData(domMap.form);
-      const params = { content: form.get('content') };
+      const params = {
+        content: form.get('content')
+      };
+
       marked_model.post(domMap.form.action, params);
     },
 
@@ -147,7 +146,7 @@ spa.marked = (() => {
     }
     marked_model.upload(file)
       .then(response => {
-        const imageUrl = okikae('![IMAGE](https://elabo-one.appspot.com/dwload/%s)', response.filename);
+        const imageUrl = `![IMAGE](https://elabo-one.appspot.com/dwload/${response.filename})`;
         insertAtCaret(domMap.content, imageUrl);
         //画像の表示
         keyupHandler();
@@ -158,6 +157,7 @@ spa.marked = (() => {
   const keyupHandler = event => {
     const content = domMap.content.value;
     domMap.preview.innerHTML = converter.makeHtml(content);
+    spa.mathjax.update();
 
   };
 
@@ -267,7 +267,6 @@ spa.marked = (() => {
       marked_model.channelList();
     }
     
-
   };
 
 
@@ -278,6 +277,7 @@ spa.marked = (() => {
   };
   //------------------- END PUBLIC METHODS ---------------------
 })();
+
 //[url, title, tags, slug, channel, channel_list, content, 前画面(blog) ]
 spa.marked.template = params => {
   const [url, title, tags, slug, channel, channel_list, content, before] = params;
