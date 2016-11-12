@@ -23,9 +23,11 @@ spa.showdownext = (() => {
       return [
         { 
           //convert extention for mathmatical formula
+          //[^\(\~]-->Block Codeの変換を防止する
           type: 'lang',
-          regex: /\\\\\[([^]+?)\\\\\]/gi,
+          regex: /\\\[[^\(\~]([^]+?)\\\]/g,
           replace: (s, match) => {
+            //console.info(match);
             matches.push(`<div class="mathjax">\\[${match}\\]</div>`);
             let n = matches.length - 1;
             return '%PLACEHOLDER' + n + '%';

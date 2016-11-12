@@ -23,10 +23,13 @@ spa.marked = (() => {
       //channelList.sampleは試用投稿グループ
       container: null,
       channelList: null,
-      isSource: false
+      isSource: false,
+      timeout: null
     };
   let domMap = {};
   //定数はここで宣言
+  //タイムバッファは連続打鍵時の逐次htmlコンバートを避ける
+  const timeBuffer = 1500;
   //公開モジュールを参照する場合はここで宣言
   const marked_model = spa.model.marked;
   //----END SCOPE VARIABLES------------------------------------- 
@@ -155,9 +158,14 @@ spa.marked = (() => {
   };
 
   const keyupHandler = event => {
-    const content = domMap.content.value;
-    domMap.preview.innerHTML = converter.makeHtml(content);
-    spa.mathjax.update();
+    if (stateMap.timeout) {clearTimeout(stateMap.timeout)}
+    stateMap.timeout = setTimeout(
+      () => {
+        const content = domMap.content.value;
+        domMap.preview.innerHTML = converter.makeHtml(content);
+        spa.mathjax.update();
+      },
+      timeBuffer);
 
   };
 
